@@ -1,0 +1,1 @@
+include ':app', ':Server', ':gson-2.8.5', ':sqlite-jdbc-3.7.2'

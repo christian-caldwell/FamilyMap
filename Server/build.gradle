@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation files('libs/http-2.2.1.jar')
+    implementation files('libs/json-20160212.jar')
+    implementation project(':gson-2.8.5')
+    implementation project(':sqlite-jdbc-3.7.2')
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
