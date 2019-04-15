@@ -1,7 +1,9 @@
 package Model;
 
-public class Event// implements Comparable<Event>
-{
+import java.io.Serializable;
+
+public class Event implements Serializable {// implements Comparable<Event>
+
     private String descendant;
 	private String eventID; //unique ID
     private String personID; //personID of associated person

@@ -1,7 +1,8 @@
 package Model;
 
-public class AuthToken 
-{
+import java.io.Serializable;
+
+public class AuthToken implements Serializable {
 	private String authToken;
 	private String userName;
 	private String personID;

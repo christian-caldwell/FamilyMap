@@ -57,13 +57,9 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
     private String selectedEventId;
     private int mapRecurseCount = 10;
 
-
-
-
     public MainMapFragment() {
         // Required empty public constructor
     }
-
 
     public  static MainMapFragment newInstance(String eventId) {
         MainMapFragment fragment = new MainMapFragment();
@@ -72,12 +68,6 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
         fragment.setArguments(args);
         return fragment;
     }
-
-
-
-
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,11 +110,10 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
         return v;
     }
 
-
     public void onButtonClicked(Person person) {
-//        Intent intent = new Intent(getActivity(), PersonActivity.class);
-//        intent.putExtra("person", person);
-//        startActivity(intent);
+        Intent intent = new Intent(getActivity(), PersonActivity.class);
+        intent.putExtra("person", person);
+        startActivity(intent);
     }
 
     @Override

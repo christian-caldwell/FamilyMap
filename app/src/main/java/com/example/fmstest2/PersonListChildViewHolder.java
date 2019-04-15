@@ -1,39 +1,42 @@
 package com.example.fmstest2;
 
+
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
+import android.graphics.Canvas;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
+import com.joanzapata.android.iconify.Iconify;
 
 import Model.Event;
 import Model.Person;
-import Search.SearchRowData;
 
-public class SearchRowViewHolder extends RecyclerView.ViewHolder {
+public class PersonListChildViewHolder extends ChildViewHolder {
 
-    public TextView mainTextView;
-    public TextView secondaryTextView;
+    private TextView birthText;
+    private TextView personNameText;
     public ImageView image;
-    public LinearLayout rowView;
+    private LinearLayout container;
     public Context context;
     public String type;
     public Person person;
     public Event event;
 
-    public SearchRowViewHolder(View itemView, final Context context) {
+
+    public PersonListChildViewHolder(View itemView, final Context context) {
         super(itemView);
         this.context = context;
-        mainTextView = (TextView) itemView.findViewById(R.id.search_row_main_text);
-        secondaryTextView = (TextView) itemView.findViewById(R.id.search_row_secondary_text);
-        image = (ImageView) itemView.findViewById(R.id.search_row_image);
-        rowView = (LinearLayout) itemView.findViewById(R.id.search_row_view);
-
-        rowView.setOnClickListener(new View.OnClickListener() {
+        birthText = (TextView) itemView.findViewById(R.id.birthLifeEventText);
+        personNameText = (TextView) itemView.findViewById(R.id.lifeEventPersonText);
+        image = (ImageView) itemView.findViewById(R.id.child_image);
+        container = (LinearLayout) itemView.findViewById(R.id.person_child_layout);
+        container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (type.equals("male") || type.equals("female")) {
@@ -50,15 +53,12 @@ public class SearchRowViewHolder extends RecyclerView.ViewHolder {
                 }
             }
         });
+
     }
 
-
-
-    public void bind(SearchRowData data) {
+    public void bind(PersonListEventChild data) {
         this.type = data.getType();
-        mainTextView.setText(data.getMainText());
-        secondaryTextView.setText(data.getSecondaryText());
-        if (type.equals("location")) {
+        if (type.equals("event")) {
             image.setImageResource(R.drawable.map_marker_ic);
             this.event = data.event;
         }
@@ -72,5 +72,28 @@ public class SearchRowViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
+
+    public TextView getBirthText() {
+        return birthText;
+    }
+
+    public void setBirthText(TextView birthText) {
+        this.birthText = birthText;
+    }
+
+    public TextView getPersonNameText() {
+        return personNameText;
+    }
+
+    public void setPersonNameText(TextView personNameText) {
+        this.personNameText = personNameText;
+    }
 
 }

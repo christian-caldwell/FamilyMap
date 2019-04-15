@@ -1,7 +1,8 @@
 package Model;
 
-public class Person 
-{
+import java.io.Serializable;
+
+public class Person implements Serializable {
 	private String descendant;
     private String personID;
     private String firstName;

@@ -1,7 +1,8 @@
 package Model;
 
-public class Report
-{
+import java.io.Serializable;
+
+public class Report implements Serializable {
     private boolean status;
     private String message;
 
