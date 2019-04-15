@@ -22,8 +22,7 @@ public class TestActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
-
+    }//06:AF:C7:E1:0B:F9:08:71:7C:51:BE:32:E1:11:B8:2F:02:8F:D4:35
 
     /**
      * Manipulates the map once available.

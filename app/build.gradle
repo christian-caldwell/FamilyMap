@@ -31,7 +31,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compile project(path: ':Server')
     implementation project(':gson-2.8.5')
-    compile('com.google.android.gms:play-services-maps:9.0.2') {
+    compile('com.google.android.gms:play-services-maps:11.0.4') {
         exclude module: 'support-v4'
     }
     compile('com.androidmapsextensions:android-maps-extensions:2.2.0') {
