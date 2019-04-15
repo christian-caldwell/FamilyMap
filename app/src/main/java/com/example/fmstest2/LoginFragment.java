@@ -378,11 +378,6 @@ public class LoginFragment extends Fragment {
                 serverData.setLoggedIn(true);
                 android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
                 MainActivity mainActivity = (MainActivity) getActivity();
-                Communicator clientCommunicator = new Communicator();
-                List<Person> peopleList = JsonResponseParser.parsePeople(clientCommunicator.getPeople());
-                serverData.setPeopleList(peopleList);
-                List<Event> eventList = JsonResponseParser.parseEvents(clientCommunicator.getEvents());
-                serverData.setEventList(eventList);
                 fm.beginTransaction()
                         .replace(R.id.mainFrameLayout, new MainMapFragment())
                         .addToBackStack(null)

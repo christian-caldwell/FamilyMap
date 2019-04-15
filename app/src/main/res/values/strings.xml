@@ -11,5 +11,6 @@
     <string name="title_activity_filter">FilterActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_test">Map</string>
 
 </resources>
