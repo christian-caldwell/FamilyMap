@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">Family Map App</string>
+    <string name="app_name">Family Map</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main_map_fragment">Map</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCBz8Nn9isPzIPdF0qbOGlCyvrQ_Y8Ugpg</string>
+
+    <string name="title_activity_person">PersonActivity</string>
+    <string name="google_app_id">family-map-1249</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_filter">FilterActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_map">MapActivity</string>
+
 </resources>

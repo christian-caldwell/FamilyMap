@@ -110,6 +110,115 @@ public class Communicator {
         }
     }
 
+    public JSONObject requestFillUser() {
+        try {
+            URL url = new URL( "http://" + serverData.getServerHost() + ":" + serverData.getServerPort() + "/fill/" + serverData.getUser().getUserName());
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect();
+
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                InputStream responseBody = connection.getInputStream();
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int length = 0;
+                while ((length = responseBody.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+
+                String responseBodyData = baos.toString();
+                JSONObject responseBodyJson = new JSONObject(responseBodyData);
+                return responseBodyJson;
+            } else {
+                Log.e("HTTP", "The event http request did not work.");
+                return null;
+            }
+        } catch (Exception e) {
+            Log.e("IO", "The event io http did not work");
+            return null;
+        }
+    }
+    public JSONObject getEvents() {
+        try {
+            URL url = new URL("http://" + serverData.getServerHost() + ":" + serverData.getServerPort() + "/event");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            // Set HTTP request header
+            connection.addRequestProperty("Authorization", serverData.getToken().getAuthorization());
+            connection.connect();
+
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                // Get HTTP response headers, if necessary
+                // Map<String, List<String>> headers = connection.getHeaderFields();
+                // Get response body input stream
+                InputStream responseBody = connection.getInputStream();
+
+                // Read response body bytes
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int length = 0;
+                while ((length = responseBody.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+
+                // Convert response body bytes to a string
+                String responseBodyData = baos.toString();
+                JSONObject responseBodyJson = new JSONObject(responseBodyData);
+                return responseBodyJson;
+            } else {
+                Log.e("HTTP", "The event http request did not work.");
+                return null;
+            }
+        } catch (Exception e) {
+            Log.e("IO", "The event io http did not work");
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public JSONObject getPeople()  {
+        try {
+            URL url = new URL("http://" + serverData.getServerHost() + ":" + serverData.getServerPort() + "/person");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            // Set HTTP request header
+            connection.addRequestProperty("Authorization", serverData.getToken().getAuthorization());
+            connection.connect();
+
+            System.out.println(connection.getResponseCode());
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                // Get HTTP response headers, if necessary
+                // Map<String, List<String>> headers = connection.getHeaderFields();
+                // Get response body input stream
+                InputStream responseBody = connection.getInputStream();
+
+                // Read response body bytes
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int length = 0;
+                while ((length = responseBody.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+
+                // Convert response body bytes to a string
+                String responseBodyData = baos.toString();
+                JSONObject responseBodyJson = new JSONObject(responseBodyData);
+                return responseBodyJson;
+            } else {
+                Log.e("HTTP", "The people http request did not work.");
+                return null;
+            }
+        } catch (Exception e) {
+            Log.e("IO", "The people io http did not work");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     private HttpURLConnection connectAndSend(URL finalUrl, String requestBodyString) throws IOException{
         HttpURLConnection connection = (HttpURLConnection)finalUrl.openConnection();
 

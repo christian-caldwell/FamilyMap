@@ -25,12 +25,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import Model.AuthToken;
+import Model.Event;
+import Model.Person;
 import Model.User;
 import Server.Communicator;
+import Server.JsonResponseParser;
 import Server.ServerData;
 
 public class LoginFragment extends Fragment {
@@ -89,6 +93,9 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getActivity(), "Data Field(s) Are Empty",
                             Toast.LENGTH_SHORT).show();
                 }
+                else {
+
+                }
             }
         });
 
@@ -100,6 +107,9 @@ public class LoginFragment extends Fragment {
                 if (!executeRegister()) {
                     Toast.makeText(getActivity(), "Data Field(s) Are Empty",
                             Toast.LENGTH_SHORT).show();
+                }
+                else {
+
                 }
             }
         });
@@ -155,9 +165,6 @@ public class LoginFragment extends Fragment {
             }
         };
     }
-
-
-
 
     private boolean checkFieldsFilled(boolean allFieldsNeeded) {
         if (this.mServerHostEditText.getText().toString().equals("")) {
@@ -261,6 +268,11 @@ public class LoginFragment extends Fragment {
                 newToken.setPersonID(registerResult.getString("personID"));
                 serverData.setToken(newToken);
                 serverData.setUser();
+                clientCommunicator.requestFillUser();
+                List<Person> peopleList = JsonResponseParser.parsePeople(clientCommunicator.getPeople());
+                serverData.setPeopleList(peopleList);
+                List<Event> eventList = JsonResponseParser.parseEvents(clientCommunicator.getEvents());
+                serverData.setEventList(eventList);
                 return 1;
             }
             catch (Exception e) {
@@ -285,6 +297,14 @@ public class LoginFragment extends Fragment {
                                 " \n New AuthToken: " +
                                 serverData.getToken().getAuthorization(),
                         Toast.LENGTH_LONG).show();
+                serverData.setLoggedIn(true);
+                    android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    fm.beginTransaction()
+                            .replace(R.id.mainFrameLayout, new MainMapFragment())
+                            .addToBackStack(null)
+                            .commit();
+                    mainActivity.setIconsVisible();
 
             }
             else if (resultType == 0) {
@@ -326,6 +346,11 @@ public class LoginFragment extends Fragment {
                 newToken.setUserName(loginResult.getString("userName"));
                 newToken.setPersonID(loginResult.getString("personID"));
                 serverData.setToken(newToken);
+                serverData.setUser();
+                List<Person> peopleList = JsonResponseParser.parsePeople(clientCommunicator.getPeople());
+                serverData.setPeopleList(peopleList);
+                List<Event> eventList = JsonResponseParser.parseEvents(clientCommunicator.getEvents());
+                serverData.setEventList(eventList);
                 return 1;
             }
             catch (Exception e) {
@@ -341,7 +366,7 @@ public class LoginFragment extends Fragment {
         protected void onPostExecute(Integer resultType) {
             if (resultType == 1) {
 
-            Toast.makeText(getActivity(), "Login Of "  +
+                Toast.makeText(getActivity(), "Login Of "  +
                             serverData.getUser().getUserName() +
                             " Is Successful! \n FirstName: " +
                             serverData.getUser().getFirstName() +
@@ -350,7 +375,19 @@ public class LoginFragment extends Fragment {
                             " \n New AuthToken: " +
                             serverData.getToken().getAuthorization(),
                             Toast.LENGTH_LONG).show();
-
+                serverData.setLoggedIn(true);
+                android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+                MainActivity mainActivity = (MainActivity) getActivity();
+                Communicator clientCommunicator = new Communicator();
+                List<Person> peopleList = JsonResponseParser.parsePeople(clientCommunicator.getPeople());
+                serverData.setPeopleList(peopleList);
+                List<Event> eventList = JsonResponseParser.parseEvents(clientCommunicator.getEvents());
+                serverData.setEventList(eventList);
+                fm.beginTransaction()
+                        .replace(R.id.mainFrameLayout, new MainMapFragment())
+                        .addToBackStack(null)
+                        .commit();
+                mainActivity.setIconsVisible();
             }
             else if (resultType == 0) {
                 Toast.makeText(getActivity(), "Error During Registration...",
