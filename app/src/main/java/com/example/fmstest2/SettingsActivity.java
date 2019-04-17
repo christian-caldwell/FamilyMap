@@ -1,5 +1,6 @@
 package com.example.fmstest2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,10 +37,12 @@ public class SettingsActivity extends AppCompatActivity {
 
     private LinearLayout resyncDataView;
     private LinearLayout logoutView;
+    public static Context activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.activity = this;
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -148,7 +151,6 @@ public class SettingsActivity extends AppCompatActivity {
         logoutView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ServerData.getInstance().setLoggedIn(false);
                 Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
@@ -160,8 +162,11 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 PeopleTask peopleTask = new PeopleTask();
                 peopleTask.execute();
-
-            }
+                ServerData.getInstance().setRelog(true);
+                Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+        }
         });
 
     }
@@ -217,10 +222,10 @@ public class SettingsActivity extends AppCompatActivity {
                 JSONObject eventResult = communicator.getEvents();
                 List<Event> eventList = JsonResponseParser.parseEvents(eventResult);
                 serverData.setEventList(eventList);
-
                 return 0;
             }
             catch (Exception e) {
+                e.printStackTrace();
                 Toast.makeText(getApplicationContext(), "Resync Failed!",
                         Toast.LENGTH_LONG).show();
             }
@@ -233,7 +238,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer id) {
-            ServerData.getInstance().setLoggedIn(true);
             Toast.makeText(getApplicationContext(), "Reloaded Data",
                     Toast.LENGTH_LONG).show();
 

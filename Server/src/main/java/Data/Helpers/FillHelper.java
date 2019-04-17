@@ -245,7 +245,7 @@ public class FillHelper {
 			    		(int)(rand.nextDouble() * (locationsArray.size()-1))).getAsJsonObject();
 		    }while(!location.has("longitude") || !location.has("latitude") || !location.has("country")
 		    		|| !location.has("city"));
-		    
+
 		    event.setLongitude(location.get("longitude").getAsDouble());
 		    event.setLatitude(location.get("latitude").getAsDouble());
 		    event.setCountry(location.get("country").getAsString());

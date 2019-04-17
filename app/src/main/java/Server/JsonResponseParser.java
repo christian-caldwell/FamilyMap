@@ -28,6 +28,7 @@ public class JsonResponseParser {
             user.setPersonId(jsonUser.getString("personId"));
             return user;
         } catch (JSONException e) {
+            e.printStackTrace();
             Log.e("JSON", "Json exception in parseUser.");
             return user;
         }
@@ -46,17 +47,23 @@ public class JsonResponseParser {
                     person.setFirstName(jsonPerson.getString("firstName"));
                     person.setLastName(jsonPerson.getString("lastName"));
                     person.setGender(jsonPerson.getString("gender"));
-                    person.setSpouse(jsonPerson.getString("spouse"));
+                    if (jsonPerson.has("spouse")) {
+                        person.setSpouse(jsonPerson.getString("spouse"));
+                    }
                 }
                 catch (JSONException e) {
-
+                    e.printStackTrace();
                 }
                 try {
-                    person.setFather(jsonPerson.getString("father"));
-                    person.setMother(jsonPerson.getString("mother"));
+                    if (jsonPerson.has("father")) {
+                        person.setSpouse(jsonPerson.getString("father"));
+                    }
+                    if (jsonPerson.has("mother")) {
+                        person.setSpouse(jsonPerson.getString("mother"));
+                    }
                 }
                 catch (JSONException e) {
-
+                    e.printStackTrace();
                 }
                 personList.add(person);
             }
@@ -64,6 +71,7 @@ public class JsonResponseParser {
 
         } catch (JSONException e) {
             Log.e("JSON", "Json exception in parsePeople.");
+            e.printStackTrace();
             return null;
         }
     }
@@ -112,6 +120,7 @@ public class JsonResponseParser {
 
         } catch (JSONException e) {
             Log.e("JSON", "Json exception in parseEvent.");
+            e.printStackTrace();
             return null;
         }
     }

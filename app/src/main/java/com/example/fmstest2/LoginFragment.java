@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
@@ -268,7 +269,7 @@ public class LoginFragment extends Fragment {
                 newToken.setPersonID(registerResult.getString("personID"));
                 serverData.setToken(newToken);
                 serverData.setUser();
-                clientCommunicator.requestFillUser();
+                //clientCommunicator.requestFillUser();
                 List<Person> peopleList = JsonResponseParser.parsePeople(clientCommunicator.getPeople());
                 serverData.setPeopleList(peopleList);
                 List<Event> eventList = JsonResponseParser.parseEvents(clientCommunicator.getEvents());
@@ -276,6 +277,7 @@ public class LoginFragment extends Fragment {
                 return 1;
             }
             catch (Exception e) {
+                e.printStackTrace();
                 return 0;
             }
         }
@@ -347,6 +349,8 @@ public class LoginFragment extends Fragment {
                 newToken.setPersonID(loginResult.getString("personID"));
                 serverData.setToken(newToken);
                 serverData.setUser();
+                System.out.println(clientCommunicator.getPeople());
+                System.out.println(clientCommunicator.getEvents());
                 List<Person> peopleList = JsonResponseParser.parsePeople(clientCommunicator.getPeople());
                 serverData.setPeopleList(peopleList);
                 List<Event> eventList = JsonResponseParser.parseEvents(clientCommunicator.getEvents());
@@ -354,6 +358,7 @@ public class LoginFragment extends Fragment {
                 return 1;
             }
             catch (Exception e) {
+                e.printStackTrace();
                 return 0;
             }
         }

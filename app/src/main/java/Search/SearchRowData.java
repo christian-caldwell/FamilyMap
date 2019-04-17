@@ -32,7 +32,7 @@ public class SearchRowData {
     public SearchRowData(Event event) {
         ServerData fms = ServerData.getInstance();
         mainText = event.toString();
-        secondaryText = fms.getPeopleMap().get(event.getPersonID()).getDescendant();
+        secondaryText = fms.getPeopleMap().get(event.getPersonID()).getFirstName() + fms.getPeopleMap().get(event.getPersonID()).getLastName();
         type = "location";
         this.event = event;
     }

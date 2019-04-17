@@ -72,11 +72,15 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         filterState = FilterState.getInstance();
         try {
-            selectedEventId = getArguments().getString(ARG_EVENT_ID);
+            if (getArguments() != null) {
+                selectedEventId = getArguments().getString(ARG_EVENT_ID);
+            }
         }
         catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -133,7 +137,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
 
             curMarker = map.addMarker(new MarkerOptions()
                     .position(eventLatLng)
-                    .title(person.getDescendant())
+                    .title(person.getFirstName() + " " + person.getLastName())
                     .icon(BitmapDescriptorFactory.defaultMarker(this.serverData.getEventColorMap().get(event.getDescription()))));
 
             eventMarkerMap.put(curMarker, event);
@@ -172,7 +176,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
         Event event = eventMarkerMap.get(marker);
         marker.showInfoWindow();
         genderImage.setImageDrawable(Utils.getGenderIcon(getActivity(), this.serverData.getPersonById(event.getPersonID()).getGender()));
-        currentPersonText.setText(this.serverData.getPersonById(event.getPersonID()).getPersonID());
+        currentPersonText.setText(this.serverData.getPersonById(event.getPersonID()).getFirstName() + " " + this.serverData.getPersonById(event.getPersonID()).getLastName());
         currentEventText.setText(event.toString());
         curMarker = marker;
         drawLines();
@@ -190,17 +194,17 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
     @Override
     public void onResume() {
         super.onResume();
-        redrawMarkers();
-        try {
-            map.setMapType(FilterState.getInstance().mapType);
-            drawLines();
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(curMarker.getPosition(), 1));
+        if (map != null) {
+            redrawMarkers();
+            try {
+                map.setMapType(FilterState.getInstance().mapType);
+                drawLines();
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(curMarker.getPosition(), 1));
 
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        catch (Exception e) {
-
-        }
-
     }
 
     public void redrawMarkers() {
@@ -263,7 +267,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
             }
         }
         catch (Exception e) {
-
+            e.printStackTrace();
         }
         if (filterState.areAllEventsShown() && filterState.isShowEventLine()) {
             drawEventLines();
@@ -278,6 +282,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
 
     public void drawEventLines() {
         Event event = eventMarkerMap.get(curMarker);
+        System.out.println(eventMarkerMap.toString());
         List<Event> eventList = Utils.getPersonEvents(event.getPersonID());
         Utils.sortEvents(eventList);
         PolylineOptions polylineOptions = new PolylineOptions();
@@ -297,7 +302,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
 
         Person person = ServerData.getInstance().getPeopleMap().get(event.getPersonID());
         String spouseId = person.getSpouse();
-        if (spouseId != null) {
+        if (spouseId != null && !spouseId.equals("")) {
             for (Marker marker: eventMarkerMap.keySet()) {
                 Event spouseEvent = this.serverData.getEarliestEvent(spouseId);
                 if (eventMarkerMap.get(marker).getEventID().equals(spouseEvent.getEventID())) {

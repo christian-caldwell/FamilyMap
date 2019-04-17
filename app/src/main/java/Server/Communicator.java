@@ -26,9 +26,59 @@ public class Communicator {
 
     public class LoginFailedException extends Exception {}
 
+
+    public JSONObject clearDB() {
+        String inputUrl = "http://" + serverData.getServerHost() + ":" + serverData.getServerPort();
+        ByteArrayOutputStream baos = null;
+
+        try {
+            JSONObject requestBodyJson = new JSONObject();
+            URL finalUrl = new URL(inputUrl + "/clear/");
+            HttpURLConnection connection = connectAndSend(finalUrl, requestBodyJson.toString());
+
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                // Get response body input stream
+                InputStream responseBody = connection.getInputStream();
+
+                // Read response body bytes
+                baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int length = 0;
+                while ((length = responseBody.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }
+
+                // Convert response body bytes to a string
+                String responseBodyData = baos.toString();
+                JSONObject responseBodyJson = new JSONObject(responseBodyData);
+//                if (responseBodyJson.has("message")) {
+//                    responseBodyJson = null;
+//                }
+                return responseBodyJson;
+            }
+            else {
+                return null;
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            if (baos != null) {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     public JSONObject sendLoginRequest() throws LoginFailedException{
         String inputUrl = "http://" + serverData.getServerHost() + ":" + serverData.getServerPort();
         User clientUser = serverData.getNewUser();
+        ByteArrayOutputStream baos = null;
         try {
             JSONObject requestBodyJson = new JSONObject();
             requestBodyJson.put("userName", clientUser.getUserName());
@@ -42,7 +92,7 @@ public class Communicator {
                 InputStream responseBody = connection.getInputStream();
 
                 // Read response body bytes
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                baos = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
                 int length = 0;
                 while ((length = responseBody.read(buffer)) != -1) {
@@ -65,11 +115,21 @@ public class Communicator {
             e.printStackTrace();
             return null;
         }
+        finally {
+            if (baos != null) {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public JSONObject sendRegisterRequest() throws LoginFailedException{
         String inputUrl = "http://" + serverData.getServerHost() + ":" + serverData.getServerPort();
         User clientUser = serverData.getNewUser();
+        ByteArrayOutputStream baos = null;
         try {
             JSONObject requestBodyJson = new JSONObject();
             requestBodyJson.put("userName", clientUser.getUserName());
@@ -87,7 +147,7 @@ public class Communicator {
                 InputStream responseBody = connection.getInputStream();
 
                 // Read response body bytes
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                baos = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
                 int length = 0;
                 while ((length = responseBody.read(buffer)) != -1) {
@@ -108,9 +168,20 @@ public class Communicator {
             e.printStackTrace();
             return null;
         }
+        finally {
+            if (baos != null) {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public JSONObject requestFillUser() {
+        ByteArrayOutputStream baos = null;
+
         try {
             URL url = new URL( "http://" + serverData.getServerHost() + ":" + serverData.getServerPort() + "/fill/" + serverData.getUser().getUserName());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -120,7 +191,7 @@ public class Communicator {
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream responseBody = connection.getInputStream();
 
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                baos = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
                 int length = 0;
                 while ((length = responseBody.read(buffer)) != -1) {
@@ -136,13 +207,27 @@ public class Communicator {
             }
         } catch (Exception e) {
             Log.e("IO", "The event io http did not work");
+            e.printStackTrace();
+
             return null;
+        }
+        finally {
+            if (baos != null) {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     public JSONObject getEvents() {
+        ByteArrayOutputStream baos = null;
+
         try {
             URL url = new URL("http://" + serverData.getServerHost() + ":" + serverData.getServerPort() + "/event");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
             connection.setRequestMethod("GET");
 
             // Set HTTP request header
@@ -156,7 +241,7 @@ public class Communicator {
                 InputStream responseBody = connection.getInputStream();
 
                 // Read response body bytes
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                baos = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
                 int length = 0;
                 while ((length = responseBody.read(buffer)) != -1) {
@@ -173,12 +258,24 @@ public class Communicator {
             }
         } catch (Exception e) {
             Log.e("IO", "The event io http did not work");
+            e.printStackTrace();
             System.out.println(e.getMessage());
             return null;
+        }
+        finally {
+            if (baos != null) {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     public JSONObject getPeople()  {
+        ByteArrayOutputStream baos = null;
+
         try {
             URL url = new URL("http://" + serverData.getServerHost() + ":" + serverData.getServerPort() + "/person");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -196,7 +293,7 @@ public class Communicator {
                 InputStream responseBody = connection.getInputStream();
 
                 // Read response body bytes
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                baos = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
                 int length = 0;
                 while ((length = responseBody.read(buffer)) != -1) {
@@ -215,6 +312,15 @@ public class Communicator {
             Log.e("IO", "The people io http did not work");
             e.printStackTrace();
             return null;
+        }
+        finally {
+            if (baos != null) {
+                try {
+                    baos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

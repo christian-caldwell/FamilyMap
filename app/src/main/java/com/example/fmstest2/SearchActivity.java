@@ -89,12 +89,12 @@ public class SearchActivity extends AppCompatActivity {
     public List<SearchRowData> search(String search) {
         ServerData fms = ServerData.getInstance();
         List<SearchRowData> resultList = new LinkedList<>();
-        search.toLowerCase();
+        String term = search.toLowerCase();
 
         for (Person person: fms.getPeopleList()) {
             String firstName = person.getFirstName().toLowerCase();
             String lastName = person.getLastName().toLowerCase();
-            if (firstName.contains(search) || lastName.contains(search)) {
+            if (firstName.contains(term) || lastName.contains(term)) {
                 resultList.add(new SearchRowData(person));
             }
         }
@@ -105,8 +105,8 @@ public class SearchActivity extends AppCompatActivity {
             String description = event.getDescription();
             Integer eventYear = new Integer(event.getYear());
             String year = eventYear.toString();
-            if (countries.contains(search) || cities.contains(search)
-                    || description.contains(search) || year.contains(search)) {
+            if (countries.contains(term) || cities.contains(term)
+                    || description.contains(term) || year.contains(term)) {
                 resultList.add(new SearchRowData(event));
             }
         }

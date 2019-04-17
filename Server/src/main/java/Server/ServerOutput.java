@@ -28,6 +28,7 @@ public class ServerOutput {
 			}
 			else
 			{
+				System.out.print("ahhh");
 				exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, -1);
 			}
 		}

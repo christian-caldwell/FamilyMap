@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.joanzapata.android.iconify.IconDrawable;
@@ -39,7 +40,15 @@ public class MainActivity extends AppCompatActivity {
         loginFragment = (LoginFragment) fm.findFragmentById(R.id.mainFrameLayout);
         MainMapFragment mainMapFragmet = (MainMapFragment) fm.findFragmentById(R.id.mainFrameLayout);
 
-        if (serverData.isLoggedIn()) {
+        if (serverData.getRelog()) {
+            if (mapFragment == null) {
+                mapFragment = MainMapFragment.newInstance(null);
+                fm.beginTransaction()
+                        .add(R.id.mainFrameLayout, mapFragment)
+                        .commit();
+            }
+        }
+        else if (serverData.isLoggedIn()) {
             if (mapFragment == null) {
                 mapFragment = MainMapFragment.newInstance(null);
                 fm.beginTransaction()
@@ -54,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
                         .add(R.id.mainFrameLayout, loginFragment)
                         .commit();
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (ServerData.getInstance().getRelog()) {
+            Toast.makeText(this, "Stutter Detected - Action Revoked",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            super.onBackPressed();
         }
     }
 

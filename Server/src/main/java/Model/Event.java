@@ -105,4 +105,9 @@ public class Event implements Serializable {// implements Comparable<Event>
     public String getDescendant() {
         return descendant;
     }
+
+    @Override
+    public String toString() {
+        return description + ": " + country + ", " + city + "(" + String.valueOf(year) + ")";
+    }
 }

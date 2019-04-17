@@ -93,4 +93,18 @@ public class Person implements Serializable {
     public String getSpouse() {
         return spouse;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "descendant='" + descendant + '\'' +
+                ", personId='" + personID + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", spouseId='" + spouse + '\'' +
+                ", fatherId='" + father + '\'' +
+                ", motherId='" + mother + '\'' +
+                '}';
+    }
 }

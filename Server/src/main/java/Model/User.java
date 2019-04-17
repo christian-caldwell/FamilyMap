@@ -84,4 +84,13 @@ public class User implements Serializable {
 		return personId;
 	}
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", personId='" + personId + '\'' +
+				'}';
+	}
+
 }

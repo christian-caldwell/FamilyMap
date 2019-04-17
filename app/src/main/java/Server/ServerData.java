@@ -24,6 +24,7 @@ public class ServerData {
     private String serverHost;
     private boolean loggedIn;
     private boolean toastThrown = false;
+    private boolean relog;
 
     private List<Person> peopleList;
     private List<Event> eventList;
@@ -50,6 +51,7 @@ public class ServerData {
         colorList.add(BitmapDescriptorFactory.HUE_VIOLET);
         colorList.add(BitmapDescriptorFactory.HUE_ROSE);
         loggedIn = false;
+        relog = false;
     }
 
     public static ServerData getInstance() {
@@ -59,6 +61,13 @@ public class ServerData {
         return instance;
     }
 
+    public boolean getRelog() {
+        return this.relog;
+    }
+
+    public  void setRelog (boolean relog) {
+        this.relog = relog;
+    }
     public User getUser() {
         return user;
     }
@@ -159,12 +168,36 @@ public class ServerData {
         }
     }
     public void buildEventColorMap() {
-        int count = 0;
+        int count;
         eventColorMap = new HashMap<>();
         for (String event: eventTypes) {
-            count = count % 9;
+            switch (event) {
+                case ("birth"):
+                    count = 0;
+                    break;
+                case ("first job"):
+                    count = 1;
+                    break;
+                case ("second job"):
+                    count = 2;
+                    break;
+                case ("third job"):
+                    count = 3;
+                    break;
+                case ("marriage"):
+                    count = 4;
+                    break;
+                case ("retirement"):
+                    count = 5;
+                    break;
+                case ("death"):
+                    count = 6;
+                    break;
+                default:
+                    count = 7;
+                    break;
+            }
             eventColorMap.put(event, colorList.get(count));
-            count++;
         }
     }
 

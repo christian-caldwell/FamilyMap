@@ -36,6 +36,7 @@ public class DataBase
 		}
 		catch (ClassNotFoundException e)
 		{
+			e.printStackTrace();
 			System.out.print("Class Not found error\n");
 		}
 	}

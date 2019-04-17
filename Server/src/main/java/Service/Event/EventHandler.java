@@ -40,6 +40,7 @@ public class EventHandler extends Handler implements HttpHandler  {
 			EventRequest request = new EventRequest(token, params);
 			EventProvider provider = new EventProvider();
 			EventResponse response = provider.execute(request);
+			System.out.print(response.event.toString());
 			if (response.getReportErrorMessage() != null) {
 				this.output.createAndSend(response.getReportErrorMessage(), httpExchange);
 			}

@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DBAccessEvents 
+public class DBAccessEvents
 {
 	private DataBase db;
-	
+
 	public DBAccessEvents(DataBase db)
 	{
 		this.db = db;
 	}
-	
+
 	public void createTable(Connection connect) throws SQLException {
 		String sql = "CREATE TABLE IF NOT EXISTS EVENTS"+
 				"("+
@@ -37,23 +37,23 @@ public class DBAccessEvents
 				");";
 		PreparedStatement statement = connect.prepareStatement(sql);
 		statement.executeUpdate();
-		
+
 	}
-	
+
 	public void resetTable(Connection connect) throws SQLException {
 		String sql = "DROP TABLE IF EXISTS events; ";
 		PreparedStatement statement = connect.prepareStatement(sql);
 		statement.executeUpdate();
 		createTable(connect);
 	}
-	
+
 	public void addEventToTable(Event newEvent) throws SQLException
 	{
 		PreparedStatement statement = null;
 		String sql = "insert into events (eventid, descendant, " +
 				"personid, longitude, latitude,  year, description," +
 				" country, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		
+
 		try
 		{
 			statement = db.connection.prepareStatement(sql);
@@ -66,7 +66,7 @@ public class DBAccessEvents
 			statement.setString(7, newEvent.getCity());
 			statement.setString(8, newEvent.getCountry());
 			statement.setString(9, newEvent.getDescription());
-			
+
 			if(statement.executeUpdate() != 1)
 			{
 				throw new SQLException();
@@ -98,7 +98,7 @@ public class DBAccessEvents
 		}
 		System.out.println("free");
 		return combinedEventList;
-		
+
 	}
 	public Event findEventByEvent(String givenEventID) throws SQLException
 	{
