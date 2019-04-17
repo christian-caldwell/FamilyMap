@@ -8,6 +8,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import Filter.FilterData;
 import Filter.RowData;
 
 public class RowViewHolder extends RecyclerView.ViewHolder {
@@ -17,13 +18,13 @@ public class RowViewHolder extends RecyclerView.ViewHolder {
 
     public RowViewHolder(View itemView) {
         super(itemView);
-        final FilterState filterState = FilterState.getInstance();
+        final FilterData filterData = FilterData.getInstance();
         filterText = (TextView) itemView.findViewById(R.id.filter_row_text);
         filterSwitch = (Switch) itemView.findViewById(R.id.filter_switch);
         filterSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                filterState.toggleMapBool(String.valueOf(filterText.getText()), isChecked);
+                filterData.toggleMapBool(String.valueOf(filterText.getText()), isChecked);
             }
         });
     }

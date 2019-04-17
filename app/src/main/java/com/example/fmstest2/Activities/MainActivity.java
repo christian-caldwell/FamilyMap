@@ -1,9 +1,5 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Activities;
 
-import Model.Event;
-import Model.Person;
-import Server.Communicator;
-import Server.JsonResponseParser;
 import Server.ServerData;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,18 +10,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
+import com.example.fmstest2.LoginFragment;
+import com.example.fmstest2.MapFragment;
+import com.example.fmstest2.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private LoginFragment loginFragment;
     private ServerData serverData = ServerData.getInstance();
-    private MainMapFragment mapFragment;
+    private MapFragment mapFragment;
 
     private MenuItem searchIcon;
     private MenuItem filterIcon;
@@ -38,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         android.support.v4.app.FragmentManager fm = this.getSupportFragmentManager();
         loginFragment = (LoginFragment) fm.findFragmentById(R.id.mainFrameLayout);
-        MainMapFragment mainMapFragmet = (MainMapFragment) fm.findFragmentById(R.id.mainFrameLayout);
+        MapFragment mainMapFragmet = (MapFragment) fm.findFragmentById(R.id.mainFrameLayout);
 
         if (serverData.getRelog()) {
             if (mapFragment == null) {
-                mapFragment = MainMapFragment.newInstance(null);
+                mapFragment = MapFragment.newInstance(null);
                 fm.beginTransaction()
                         .add(R.id.mainFrameLayout, mapFragment)
                         .commit();
@@ -50,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (serverData.isLoggedIn()) {
             if (mapFragment == null) {
-                mapFragment = MainMapFragment.newInstance(null);
+                mapFragment = MapFragment.newInstance(null);
                 fm.beginTransaction()
                         .add(R.id.mainFrameLayout, mapFragment)
                         .commit();
@@ -127,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         if (id == R.id.toolbar_filter) {
-            Intent intent = new Intent(this, FilterActivity.class);
+            Intent intent = new Intent(this, MainFilterActivity.class);
             startActivity(intent);
             return true;
         }

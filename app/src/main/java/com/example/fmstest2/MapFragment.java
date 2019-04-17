@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.fmstest2.Activities.PersonActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,18 +30,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import Filter.FilterData;
 import Model.Event;
 import Model.Person;
 import Server.ServerData;
 
 
-public class MainMapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
 
     private static final String ARG_EVENT_ID = "event_id";
 
     private ServerData serverData;
-    private FilterState filterState;
+    private FilterData filterData;
     private GoogleMap map;
     private Marker curMarker;
     private Map<Marker, Event> eventMarkerMap;
@@ -57,12 +59,12 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
     private String selectedEventId;
     private int mapRecurseCount = 10;
 
-    public MainMapFragment() {
+    public MapFragment() {
         // Required empty public constructor
     }
 
-    public  static MainMapFragment newInstance(String eventId) {
-        MainMapFragment fragment = new MainMapFragment();
+    public  static MapFragment newInstance(String eventId) {
+        MapFragment fragment = new MapFragment();
         Bundle args = new Bundle();
         args.putString(ARG_EVENT_ID, eventId);
         fragment.setArguments(args);
@@ -73,7 +75,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        filterState = FilterState.getInstance();
+        filterData = filterData.getInstance();
         try {
             if (getArguments() != null) {
                 selectedEventId = getArguments().getString(ARG_EVENT_ID);
@@ -123,7 +125,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.setMapType(FilterState.getInstance().mapType);
+        map.setMapType(FilterData.getInstance().mapType);
         polyLineList = new ArrayList<>();
 
         this.serverData.buildEventColorMap();
@@ -156,7 +158,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
             }
         }
         else {
-            filterState.refreshFilters();
+            filterData.refreshFilters();
         }
 
 
@@ -199,7 +201,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
         if (map != null) {
             redrawMarkers();
             try {
-                map.setMapType(FilterState.getInstance().mapType);
+                map.setMapType(FilterData.getInstance().mapType);
                 drawLines();
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(curMarker.getPosition(), 1));
 
@@ -210,7 +212,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
     }
 
     public void redrawMarkers() {
-        List<String> hiddenList = FilterState.getInstance().calcHiddenMarkers();
+        List<String> hiddenList = FilterData.getInstance().calcHiddenMarkers();
         for (Marker marker: eventMarkerMap.keySet()) {
             for (String hidden: hiddenList){
                 if (eventMarkerMap.get(marker).getDescription().equals(hidden)) {
@@ -258,7 +260,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
 
     public void parentOnResumeCalled() {
         if (map != null) {
-            map.setMapType(FilterState.getInstance().mapType);
+            map.setMapType(FilterData.getInstance().mapType);
         }
     }
 
@@ -271,13 +273,13 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
         catch (Exception e) {
             e.printStackTrace();
         }
-        if (filterState.areAllEventsShown() && filterState.isShowEventLine()) {
+        if (filterData.areAllEventsShown() && filterData.isShowEventLine()) {
             drawEventLines();
         }
-        if (filterState.bothGendersAreShown() && filterState.isShowSpouseLine()) {
+        if (filterData.bothGendersAreShown() && filterData.isShowSpouseLine()) {
             drawSpouseLine();
         }
-        if (filterState.isShowAncestorLine()) {
+        if (filterData.isShowAncestorLine()) {
             drawAncestorLines();
         }
     }
@@ -294,7 +296,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
                 polylineOptions.add(new LatLng(eventList.get(i).getLatitude(), eventList.get(i).getLongitude()));
             }
         }
-        polylineOptions.color(filterState.lineColorLifeStory).width(10);
+        polylineOptions.color(filterData.lineColorLifeStory).width(10);
         Polyline finalPolyLine = map.addPolyline(polylineOptions);
         polyLineList.add(finalPolyLine);
     }
@@ -314,7 +316,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
                 }
             }
         }
-        polylineOptions.color(filterState.lineColorSpouse).width(10);
+        polylineOptions.color(filterData.lineColorSpouse).width(10);
         Polyline finalLine = map.addPolyline(polylineOptions);
         polyLineList.add(finalLine);
     }
@@ -330,7 +332,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
                 PolylineOptions polylineOptions = new PolylineOptions();
                 polylineOptions.add(new LatLng(event.getLatitude(), event.getLongitude()));
                 polylineOptions.add(new LatLng(parentEvent.getLatitude(), parentEvent.getLongitude()));
-                polylineOptions.color(filterState.lineColorTree).width(10);
+                polylineOptions.color(filterData.lineColorTree).width(10);
                 Polyline finalLine = map.addPolyline(polylineOptions);
                 polyLineList.add(finalLine);
                 familyTreeRecurse(parent);
@@ -353,7 +355,7 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
                 if (mapRecurseCount < 1) {
                     mapRecurseCount = 1;
                 }
-                polylineOptions.color(filterState.lineColorTree).width(mapRecurseCount);
+                polylineOptions.color(filterData.lineColorTree).width(mapRecurseCount);
                 Polyline finalLine = map.addPolyline(polylineOptions);
                 polyLineList.add(finalLine);
                 familyTreeRecurse(parent);

@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,10 +12,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+import com.example.fmstest2.Activities.MainActivity;
+import com.example.fmstest2.PersonListAdapter;
+import com.example.fmstest2.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 

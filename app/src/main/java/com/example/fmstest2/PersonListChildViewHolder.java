@@ -3,16 +3,14 @@ package com.example.fmstest2;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
-import com.joanzapata.android.iconify.Iconify;
+import com.example.fmstest2.Activities.MapActivity;
+import com.example.fmstest2.Activities.PersonActivity;
 
 import Model.Event;
 import Model.Person;

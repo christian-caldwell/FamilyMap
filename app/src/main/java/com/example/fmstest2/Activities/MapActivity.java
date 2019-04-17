@@ -1,18 +1,17 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.fmstest2.MapFragment;
+import com.example.fmstest2.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 
@@ -20,7 +19,7 @@ import Model.Event;
 
 public class MapActivity extends AppCompatActivity {
 
-    private MainMapFragment mapFragment;
+    private MapFragment mapFragment;
     private android.widget.Toolbar toolbar;
     private MenuItem doubleUpArrow;
 
@@ -31,7 +30,7 @@ public class MapActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map);
 
         android.support.v4.app.FragmentManager fm = this.getSupportFragmentManager();
-        mapFragment = (MainMapFragment) fm.findFragmentById(R.id.map_fragment);
+        mapFragment = (MapFragment) fm.findFragmentById(R.id.map_fragment);
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.map_toolbar);
         setSupportActionBar(toolbar);
@@ -51,7 +50,7 @@ public class MapActivity extends AppCompatActivity {
         Event event = (Event) intent.getSerializableExtra("event");
 
         if (mapFragment == null) {
-            mapFragment = MainMapFragment.newInstance(event.getEventID());
+            mapFragment = MapFragment.newInstance(event.getEventID());
             fm.beginTransaction()
                     .add(R.id.map_fragment, mapFragment)
                     .commit();

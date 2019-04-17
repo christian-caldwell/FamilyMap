@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="50dp"
-    tools:context="com.example.fmstest2.FilterActivity"
+    tools:context="com.example.fmstest2.Activities.MainFilterActivity"
     tools:showIn="@layout/activity_filter">
 
 

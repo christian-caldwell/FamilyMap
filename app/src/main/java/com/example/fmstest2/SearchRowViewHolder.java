@@ -8,7 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
+import com.example.fmstest2.Activities.MapActivity;
+import com.example.fmstest2.Activities.PersonActivity;
 
 import Model.Event;
 import Model.Person;

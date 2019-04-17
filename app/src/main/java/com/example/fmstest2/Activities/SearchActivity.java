@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Activities;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fmstest2.R;
+import com.example.fmstest2.SearchViewAdapter;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 

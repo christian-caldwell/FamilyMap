@@ -1,30 +1,23 @@
 package com.example.fmstest2;
 
 import android.graphics.Color;
-import android.icu.text.SimpleDateFormat;
-import android.icu.text.SymbolTable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-import org.json.JSONArray;
-import org.json.JSONException;
+import com.example.fmstest2.Activities.MainActivity;
+
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
@@ -303,7 +296,7 @@ public class LoginFragment extends Fragment {
                     android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
                     MainActivity mainActivity = (MainActivity) getActivity();
                     fm.beginTransaction()
-                            .replace(R.id.mainFrameLayout, new MainMapFragment())
+                            .replace(R.id.mainFrameLayout, new MapFragment())
                             .addToBackStack(null)
                             .commit();
                     mainActivity.setIconsVisible();
@@ -384,7 +377,7 @@ public class LoginFragment extends Fragment {
                 android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
                 MainActivity mainActivity = (MainActivity) getActivity();
                 fm.beginTransaction()
-                        .replace(R.id.mainFrameLayout, new MainMapFragment())
+                        .replace(R.id.mainFrameLayout, new MapFragment())
                         .addToBackStack(null)
                         .commit();
                 mainActivity.setIconsVisible();

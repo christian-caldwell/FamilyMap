@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +14,13 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.fmstest2.R;
+
 import org.json.JSONObject;
 
 import java.util.List;
 
+import Filter.FilterData;
 import Model.Event;
 import Model.Person;
 import Server.Communicator;
@@ -74,33 +77,33 @@ public class SettingsActivity extends AppCompatActivity {
         lifeStorySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                FilterState.getInstance().setShowEventLine(isChecked);
+                FilterData.getInstance().setShowEventLine(isChecked);
             }
         });
         familyTreeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                FilterState.getInstance().setShowAncestorLine(isChecked);
+                FilterData.getInstance().setShowAncestorLine(isChecked);
             }
         });
         spouseSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolean c = isChecked;
-                FilterState.getInstance().setShowSpouseLine(isChecked);
+                FilterData.getInstance().setShowSpouseLine(isChecked);
             }
         });
 
-        lifeStorySwitch.setChecked(FilterState.getInstance().isShowEventLine());
-        familyTreeSwitch.setChecked(FilterState.getInstance().isShowAncestorLine());
-        spouseSwitch.setChecked(FilterState.getInstance().isShowSpouseLine());
+        lifeStorySwitch.setChecked(FilterData.getInstance().isShowEventLine());
+        familyTreeSwitch.setChecked(FilterData.getInstance().isShowAncestorLine());
+        spouseSwitch.setChecked(FilterData.getInstance().isShowSpouseLine());
 
         lifeStorySpinner = (Spinner) findViewById(R.id.life_story_spinner);
         familyTreeSpinner = (Spinner) findViewById(R.id.family_tree_spinner);
         spouseSpinner = (Spinner) findViewById(R.id.spouse_spinner);
         mapTypeSpinner = (Spinner) findViewById(R.id.map_type_spinner);
 
-        FilterState fs = FilterState.getInstance();
+        FilterData fs = FilterData.getInstance();
         lifeStorySpinner.setSelection(fs.lineColorOptions.indexOf(fs.lineColorLifeStory));
         familyTreeSpinner.setSelection(fs.lineColorOptions.indexOf(fs.lineColorTree));
         spouseSpinner.setSelection(fs.lineColorOptions.indexOf(fs.lineColorSpouse));
@@ -109,7 +112,7 @@ public class SettingsActivity extends AppCompatActivity {
         lifeStorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FilterState.getInstance().lineColorLifeStory = FilterState.getInstance().lineColorOptions.get(position);
+                FilterData.getInstance().lineColorLifeStory = FilterData.getInstance().lineColorOptions.get(position);
             }
 
             @Override
@@ -119,7 +122,7 @@ public class SettingsActivity extends AppCompatActivity {
         familyTreeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FilterState.getInstance().lineColorTree = FilterState.getInstance().lineColorOptions.get(position);
+                FilterData.getInstance().lineColorTree = FilterData.getInstance().lineColorOptions.get(position);
             }
 
             @Override
@@ -129,7 +132,7 @@ public class SettingsActivity extends AppCompatActivity {
         spouseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FilterState.getInstance().lineColorSpouse = FilterState.getInstance().lineColorOptions.get(position);
+                FilterData.getInstance().lineColorSpouse = FilterData.getInstance().lineColorOptions.get(position);
             }
 
             @Override
@@ -140,7 +143,7 @@ public class SettingsActivity extends AppCompatActivity {
         mapTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FilterState.getInstance().mapType = FilterState.getInstance().mapTypeList.get(position);
+                FilterData.getInstance().mapType = FilterData.getInstance().mapTypeList.get(position);
             }
 
             @Override

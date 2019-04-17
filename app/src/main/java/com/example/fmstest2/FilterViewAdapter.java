@@ -13,6 +13,7 @@ import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory;
 import java.util.Collections;
 import java.util.List;
 
+import Filter.FilterData;
 import Filter.RowData;
 
 public class FilterViewAdapter extends RecyclerView.Adapter<RowViewHolder> {
@@ -44,7 +45,7 @@ public class FilterViewAdapter extends RecyclerView.Adapter<RowViewHolder> {
     public void onBindViewHolder(RowViewHolder holder, int position) {
         RowData rowData = list.get(position);
         holder.bind(rowData);
-        holder.filterSwitch.setChecked(FilterState.getInstance().getShowEventMap().get(rowData.getFilterText()));
+        holder.filterSwitch.setChecked(FilterData.getInstance().getShowEventMap().get(rowData.getFilterText()));
     }
 
 
