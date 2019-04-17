@@ -2,7 +2,7 @@ package Person;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
 import com.example.fmstest2.PersonListEventChild;
-import com.example.fmstest2.Utils;
+import com.example.fmstest2.AndroidHelpers.ActivityFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class TopEvent implements ParentObject {
         this.person = person;
         this.title = title;
         if (title.equals("event")) {
-            List<Event> personEventList = Utils.getPersonEvents(person.getPersonID());
+            List<Event> personEventList = ActivityFunctions.getPersonEvents(person.getPersonID());
             for (Event event : personEventList) {
                 String eventString = event.toString();
                 String name = person.getFirstName() + " " + person.getLastName();
@@ -33,11 +33,11 @@ public class TopEvent implements ParentObject {
         }
         else {
             parentList = new ArrayList<>();
-            if (Utils.getFather(person.getFather()) != null) {
-                parentList.add(new PersonListEventChild(Utils.getFather(person.getFather()).getFirstName() + " " + Utils.getFather(person.getFather()).getLastName(), "FATHER", "male", person, null));
+            if (ActivityFunctions.getFather(person.getFather()) != null) {
+                parentList.add(new PersonListEventChild(ActivityFunctions.getFather(person.getFather()).getFirstName() + " " + ActivityFunctions.getFather(person.getFather()).getLastName(), "FATHER", "male", person, null));
             }
-            if (Utils.getMother(person.getMother()) != null) {
-                parentList.add(new PersonListEventChild(Utils.getMother(person.getMother()).getFirstName() + " " + Utils.getMother(person.getMother()).getLastName() , "MOTHER", "female", person, null));
+            if (ActivityFunctions.getMother(person.getMother()) != null) {
+                parentList.add(new PersonListEventChild(ActivityFunctions.getMother(person.getMother()).getFirstName() + " " + ActivityFunctions.getMother(person.getMother()).getLastName() , "MOTHER", "female", person, null));
             }
         }
     }

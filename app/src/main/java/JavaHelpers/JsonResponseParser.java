@@ -1,4 +1,4 @@
-package Server;
+package JavaHelpers;
 
 import android.util.Log;
 
@@ -14,6 +14,7 @@ import Model.AuthToken;
 import Model.Event;
 import Model.Person;
 import Model.User;
+import Server.ServerData;
 
 public class JsonResponseParser {
 

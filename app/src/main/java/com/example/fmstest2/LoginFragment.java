@@ -28,7 +28,7 @@ import Model.Event;
 import Model.Person;
 import Model.User;
 import Server.Communicator;
-import Server.JsonResponseParser;
+import JavaHelpers.JsonResponseParser;
 import Server.ServerData;
 
 public class LoginFragment extends Fragment {

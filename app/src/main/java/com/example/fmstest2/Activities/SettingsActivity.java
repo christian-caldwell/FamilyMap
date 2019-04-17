@@ -24,7 +24,7 @@ import Filter.FilterData;
 import Model.Event;
 import Model.Person;
 import Server.Communicator;
-import Server.JsonResponseParser;
+import JavaHelpers.JsonResponseParser;
 import Server.ServerData;
 
 public class SettingsActivity extends AppCompatActivity {

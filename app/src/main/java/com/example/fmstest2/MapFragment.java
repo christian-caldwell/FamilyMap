@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.fmstest2.Activities.PersonActivity;
+import com.example.fmstest2.AndroidHelpers.ActivityFunctions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -179,7 +180,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public boolean onMarkerClick(Marker marker) {
         Event event = eventMarkerMap.get(marker);
         marker.showInfoWindow();
-        genderImage.setImageDrawable(Utils.getGenderIcon(getActivity(), this.serverData.getPersonById(event.getPersonID()).getGender()));
+        genderImage.setImageDrawable(ActivityFunctions.getGenderIcon(getActivity(), this.serverData.getPersonById(event.getPersonID()).getGender()));
         currentPersonText.setText(this.serverData.getPersonById(event.getPersonID()).getFirstName() + " " + this.serverData.getPersonById(event.getPersonID()).getLastName());
         currentEventText.setText(event.toString());
         curMarker = marker;
@@ -287,8 +288,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void drawEventLines() {
         Event event = eventMarkerMap.get(curMarker);
         System.out.println(eventMarkerMap.toString());
-        List<Event> eventList = Utils.getPersonEvents(event.getPersonID());
-        Utils.sortEvents(eventList);
+        List<Event> eventList = ActivityFunctions.getPersonEvents(event.getPersonID());
+        ActivityFunctions.sortEvents(eventList);
         PolylineOptions polylineOptions = new PolylineOptions();
         polylineOptions.add(new LatLng(eventList.get(0).getLatitude(), eventList.get(0).getLongitude()));
         for (int i = 1; i < eventList.size(); i++) {

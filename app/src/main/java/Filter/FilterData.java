@@ -2,7 +2,7 @@ package Filter;
 
 
 import com.androidmapsextensions.GoogleMap;
-import com.example.fmstest2.Helper.FilterValues;
+import com.example.fmstest2.AndroidHelpers.FilterValues;
 
 import java.util.ArrayList;
 import java.util.HashMap;

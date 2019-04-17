@@ -1,9 +1,10 @@
-package com.example.fmstest2;
+package com.example.fmstest2.AndroidHelpers;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
+import com.example.fmstest2.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 
@@ -20,7 +21,7 @@ import Server.ServerData;
 /**
  * This is a static class that contains usefull functions for the application.
  */
-public class Utils {
+public class ActivityFunctions {
 
     public static Drawable getGenderIcon(Activity activity, String gender) {
         if (gender.equals("m")) {
@@ -63,18 +64,6 @@ public class Utils {
             }
         }
         return null;
-    }
-
-    public static List<Person> getSibling(String personId) {
-        Person mother = getMother(personId);
-        Person father = getFather(personId);
-        List<Person> siblings = new ArrayList<>();
-        for (Person person : ServerData.getInstance().getPeopleList()) {
-            if (person.getFather().equals(father.getPersonID()) && person.getMother().equals(mother.getPersonID())) {
-                siblings.add(person);
-            }
-        }
-        return siblings;
     }
 
     public static List<Person> getChildren(String personId) {
