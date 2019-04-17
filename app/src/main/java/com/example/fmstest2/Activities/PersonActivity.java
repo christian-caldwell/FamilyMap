@@ -15,8 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
-import com.example.fmstest2.Activities.MainActivity;
-import com.example.fmstest2.PersonListAdapter;
+import com.example.fmstest2.Adapters.PersonModelMenuAdapter;
 import com.example.fmstest2.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
@@ -74,7 +73,7 @@ public class PersonActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        PersonListAdapter personListAdapter = new PersonListAdapter(this, generateEvents());
+        PersonModelMenuAdapter personListAdapter = new PersonModelMenuAdapter(this, generateEvents());
         personListAdapter.setCustomParentAnimationViewId(R.id.parentEventListArrow);
         personListAdapter.setParentClickableViewAnimationDefaultDuration();
         personListAdapter.setParentAndIconExpandOnClick(true);

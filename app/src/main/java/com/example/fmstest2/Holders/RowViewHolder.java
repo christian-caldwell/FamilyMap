@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -7,6 +7,8 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.fmstest2.R;
 
 import Filter.FilterData;
 import Filter.RowData;

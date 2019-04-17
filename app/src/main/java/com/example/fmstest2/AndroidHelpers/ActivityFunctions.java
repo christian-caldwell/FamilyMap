@@ -36,56 +36,6 @@ public class ActivityFunctions {
         }
     }
 
-    public static List<Event> getPersonEvents(String personId) {
-        List<Event> personEventList = new ArrayList<>();
-        for (Event event : ServerData.getInstance().getInstance().getEventList()) {
-            if (event.getPersonID().equals(personId)) {
-                personEventList.add(event);
-            }
-        }
-        sortEvents(personEventList);
-        Collections.reverse(personEventList);
-        return personEventList;
-    }
-
-    public static Person getFather(String personId) {
-        for (Person person : ServerData.getInstance().getInstance().getPeopleList()) {
-            if (person.getPersonID() != null && person.getPersonID().equals(personId)) {
-                return person;
-            }
-        }
-        return null;
-    }
-
-    public static Person getMother(String personId) {
-        for (Person person : ServerData.getInstance().getPeopleList()) {
-            if (person.getPersonID() != null && person.getPersonID().equals(personId)) {
-                return person;
-            }
-        }
-        return null;
-    }
-
-    public static List<Person> getChildren(String personId) {
-        List<Person> childrenList = new ArrayList<>();
-        for (Person person : ServerData.getInstance().getPeopleList()) {
-            if (person.getFather().equals(personId) || person.getMother().equals(personId)) {
-                childrenList.add(person);
-            }
-        }
-        return childrenList;
-    }
-
-
-
-    public static void sortEvents(List<Event> eventList) {
-        Collections.sort(eventList, new Comparator<Event>() {
-
-            public int compare(Event o1, Event o2) {
-                return o2.getYear() - o1.getYear();
-            }
-        });
-    }
 
 
 }

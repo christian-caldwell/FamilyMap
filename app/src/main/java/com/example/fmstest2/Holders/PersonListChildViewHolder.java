@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Holders;
 
 
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.example.fmstest2.Activities.MapActivity;
 import com.example.fmstest2.Activities.PersonActivity;
+import com.example.fmstest2.R;
 
 import Model.Event;
 import Model.Person;

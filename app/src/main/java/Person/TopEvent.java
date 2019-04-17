@@ -1,12 +1,13 @@
 package Person;
 
 import com.bignerdranch.expandablerecyclerview.Model.ParentObject;
-import com.example.fmstest2.PersonListEventChild;
-import com.example.fmstest2.AndroidHelpers.ActivityFunctions;
+import com.example.fmstest2.Holders.PersonListEventChild;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import JavaHelpers.EventModelAlgorithms;
+import JavaHelpers.PersonModelAlgorithms;
 import Model.Event;
 import Model.Person;
 import Server.ServerData;
@@ -24,7 +25,7 @@ public class TopEvent implements ParentObject {
         this.person = person;
         this.title = title;
         if (title.equals("event")) {
-            List<Event> personEventList = ActivityFunctions.getPersonEvents(person.getPersonID());
+            List<Event> personEventList = EventModelAlgorithms.getPersonEvents(person.getPersonID());
             for (Event event : personEventList) {
                 String eventString = event.toString();
                 String name = person.getFirstName() + " " + person.getLastName();
@@ -33,11 +34,11 @@ public class TopEvent implements ParentObject {
         }
         else {
             parentList = new ArrayList<>();
-            if (ActivityFunctions.getFather(person.getFather()) != null) {
-                parentList.add(new PersonListEventChild(ActivityFunctions.getFather(person.getFather()).getFirstName() + " " + ActivityFunctions.getFather(person.getFather()).getLastName(), "FATHER", "male", person, null));
+            if (PersonModelAlgorithms.getFather(person.getFather()) != null) {
+                parentList.add(new PersonListEventChild(PersonModelAlgorithms.getFather(person.getFather()).getFirstName() + " " + PersonModelAlgorithms.getFather(person.getFather()).getLastName(), "FATHER", "male", person, null));
             }
-            if (ActivityFunctions.getMother(person.getMother()) != null) {
-                parentList.add(new PersonListEventChild(ActivityFunctions.getMother(person.getMother()).getFirstName() + " " + ActivityFunctions.getMother(person.getMother()).getLastName() , "MOTHER", "female", person, null));
+            if (PersonModelAlgorithms.getMother(person.getMother()) != null) {
+                parentList.add(new PersonListEventChild(PersonModelAlgorithms.getMother(person.getMother()).getFirstName() + " " + PersonModelAlgorithms.getMother(person.getMother()).getLastName() , "MOTHER", "female", person, null));
             }
         }
     }

@@ -1,13 +1,14 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import com.example.fmstest2.R;
+import com.example.fmstest2.Holders.SearchRowViewHolder;
+
 import java.util.Collections;
 import java.util.List;
 

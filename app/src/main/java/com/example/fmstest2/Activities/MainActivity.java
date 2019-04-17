@@ -11,8 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.fmstest2.LoginFragment;
-import com.example.fmstest2.MapFragment;
+import com.example.fmstest2.Fragments.LoginFragment;
+import com.example.fmstest2.Fragments.MapFragment;
 import com.example.fmstest2.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;

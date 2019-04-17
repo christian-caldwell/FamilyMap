@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.fmstest2.Activities.PersonActivity;
 import com.example.fmstest2.AndroidHelpers.ActivityFunctions;
+import com.example.fmstest2.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 
 import Filter.FilterData;
+import JavaHelpers.EventModelAlgorithms;
 import Model.Event;
 import Model.Person;
 import Server.ServerData;
@@ -288,8 +290,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
     public void drawEventLines() {
         Event event = eventMarkerMap.get(curMarker);
         System.out.println(eventMarkerMap.toString());
-        List<Event> eventList = ActivityFunctions.getPersonEvents(event.getPersonID());
-        ActivityFunctions.sortEvents(eventList);
+        List<Event> eventList = EventModelAlgorithms.getPersonEvents(event.getPersonID());
+        EventModelAlgorithms.sortEvents(eventList);
         PolylineOptions polylineOptions = new PolylineOptions();
         polylineOptions.add(new LatLng(eventList.get(0).getLatitude(), eventList.get(0).getLongitude()));
         for (int i = 1; i < eventList.size(); i++) {

@@ -10,7 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.fmstest2.MapFragment;
+import com.example.fmstest2.Fragments.MapFragment;
 import com.example.fmstest2.R;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;

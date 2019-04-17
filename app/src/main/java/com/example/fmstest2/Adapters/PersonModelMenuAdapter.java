@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,17 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
+import com.example.fmstest2.Holders.PersonListChildViewHolder;
+import com.example.fmstest2.Holders.PersonListEventChild;
+import com.example.fmstest2.Holders.PersonParentViewHolder;
+import com.example.fmstest2.R;
 
 import java.util.List;
 
 import Person.TopEvent;
 
-public class PersonListAdapter extends ExpandableRecyclerAdapter<PersonParentViewHolder, PersonListChildViewHolder> {
+public class PersonModelMenuAdapter extends ExpandableRecyclerAdapter<PersonParentViewHolder, PersonListChildViewHolder> {
 
     private LayoutInflater mInflater;
     private Context context;
 
-    public PersonListAdapter(Context context, List parentItemList) {
+    public PersonModelMenuAdapter(Context context, List parentItemList) {
         super(context, parentItemList);
         mInflater = LayoutInflater.from(context);
         this.context = context;

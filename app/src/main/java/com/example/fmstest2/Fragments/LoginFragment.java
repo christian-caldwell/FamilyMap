@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Fragments;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.fmstest2.Activities.MainActivity;
+import com.example.fmstest2.R;
 
 import org.json.JSONObject;
 

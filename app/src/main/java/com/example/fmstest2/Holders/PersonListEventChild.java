@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Holders;
 
 import android.graphics.drawable.Drawable;
 

@@ -1,4 +1,4 @@
-package com.example.fmstest2;
+package com.example.fmstest2.Holders;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.fmstest2.Activities.MapActivity;
 import com.example.fmstest2.Activities.PersonActivity;
+import com.example.fmstest2.R;
 
 import Model.Event;
 import Model.Person;
