@@ -16,6 +16,7 @@ import com.joanzapata.android.iconify.Iconify;
 
 import Model.Event;
 import Model.Person;
+import Server.ServerData;
 
 public class PersonListChildViewHolder extends ChildViewHolder {
 
@@ -39,9 +40,15 @@ public class PersonListChildViewHolder extends ChildViewHolder {
         container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type.equals("male") || type.equals("female")) {
+                if (type.equals("male")) {
                     Intent intent = new Intent(context, PersonActivity.class);
-                    intent.putExtra("person", person);
+                    intent.putExtra("person", ServerData.getInstance().getPersonById(person.getFather()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+                else if (type.equals("female")) {
+                    Intent intent = new Intent(context, PersonActivity.class);
+                    intent.putExtra("person", ServerData.getInstance().getPersonById(person.getMother()));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }

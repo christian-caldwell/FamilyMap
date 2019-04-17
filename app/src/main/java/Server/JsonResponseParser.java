@@ -56,10 +56,10 @@ public class JsonResponseParser {
                 }
                 try {
                     if (jsonPerson.has("father")) {
-                        person.setSpouse(jsonPerson.getString("father"));
+                        person.setFather(jsonPerson.getString("father"));
                     }
                     if (jsonPerson.has("mother")) {
-                        person.setSpouse(jsonPerson.getString("mother"));
+                        person.setMother(jsonPerson.getString("mother"));
                     }
                 }
                 catch (JSONException e) {

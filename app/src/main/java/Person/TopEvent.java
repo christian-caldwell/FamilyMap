@@ -34,10 +34,10 @@ public class TopEvent implements ParentObject {
         else {
             parentList = new ArrayList<>();
             if (Utils.getFather(person.getFather()) != null) {
-                parentList.add(new PersonListEventChild(Utils.getFather(person.getFather()).getDescendant(), "FATHER", "male", person, null));
+                parentList.add(new PersonListEventChild(Utils.getFather(person.getFather()).getFirstName() + " " + Utils.getFather(person.getFather()).getLastName(), "FATHER", "male", person, null));
             }
             if (Utils.getMother(person.getMother()) != null) {
-                parentList.add(new PersonListEventChild(Utils.getMother(person.getMother()).getDescendant(), "MOTHER", "female", person, null));
+                parentList.add(new PersonListEventChild(Utils.getMother(person.getMother()).getFirstName() + " " + Utils.getMother(person.getMother()).getLastName() , "MOTHER", "female", person, null));
             }
         }
     }

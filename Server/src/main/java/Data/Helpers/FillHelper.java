@@ -191,7 +191,7 @@ public class FillHelper {
 		int secondInt = rand.nextInt();
 		makeEvent(person, "first job", firstJob, name);
 		makeEvent(person, "second job", firstJob + 5, name);
-		///makeEvent(person, "third job", firstJob + this.EMPLOYMENT_PERIOD, name);
+		makeEvent(person, "third job", firstJob + this.EMPLOYMENT_PERIOD, name);
 		makeEvent(person, "retirement", retired, name);
 	}
 	

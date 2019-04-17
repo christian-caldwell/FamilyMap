@@ -158,14 +158,12 @@ public class ServerData {
     public void buildFamilyTree() {
         familyTree = new HashMap<>();
         for (Person person: peopleList) {
-            if (person != null) {
-                String personId = person.getPersonID();
-                if (!familyTree.containsKey(personId)) {
-                    Set<String> parentSet = new HashSet<>();
-                    parentSet.add(person.getFather());
-                    parentSet.add(person.getMother());
-                    familyTree.put(personId, parentSet);
-                }
+            String personId = person.getPersonID();
+            if (!familyTree.containsKey(personId)) {
+                Set<String> parentSet = new HashSet<>();
+                parentSet.add(person.getFather());
+                parentSet.add(person.getMother());
+                familyTree.put(personId, parentSet);
             }
         }
     }
@@ -243,17 +241,6 @@ public class ServerData {
                 eventMap.put(event.getEventID(), event);
             }
         }
-        Event notEvent = new Event();
-        notEvent.setPersonID("zzztest");
-        notEvent.setEventID("zzztest");
-        notEvent.setDescendant(user.getUserName());
-        notEvent.setDescription("third job");
-        notEvent.setLatitude(new Double(0));
-        notEvent.setLongitude(new Double(0));
-        notEvent.setYear(new Integer(999999));
-        notEvent.setCity("zzztest");
-        notEvent.setCountry("zzztest");
-        this.eventList.add(notEvent);
         setEventTypes();
     }
 
