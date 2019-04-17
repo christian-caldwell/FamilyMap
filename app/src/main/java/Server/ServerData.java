@@ -158,44 +158,56 @@ public class ServerData {
     public void buildFamilyTree() {
         familyTree = new HashMap<>();
         for (Person person: peopleList) {
-            String personId = person.getPersonID();
-            if (!familyTree.containsKey(personId)) {
-                Set<String> parentSet = new HashSet<>();
-                parentSet.add(person.getFather());
-                parentSet.add(person.getMother());
-                familyTree.put(personId, parentSet);
+            if (person != null) {
+                String personId = person.getPersonID();
+                if (!familyTree.containsKey(personId)) {
+                    Set<String> parentSet = new HashSet<>();
+                    parentSet.add(person.getFather());
+                    parentSet.add(person.getMother());
+                    familyTree.put(personId, parentSet);
+                }
             }
         }
     }
     public void buildEventColorMap() {
-        int count;
+        int count = 0;
         eventColorMap = new HashMap<>();
+        String[] events = new String[7];
+        for (int i = 0; i < 7; i++) {
+            events[i] = null;
+        }
         for (String event: eventTypes) {
-            if (event.equals("birth")) {
-                count = 0;
-            }
-            else if (event.equals("first job")) {
-                count = 1;
-            }
-            else if (event.equals("first job")) {
-                count = 2;
-            }
-            else if (event.equals("first job")) {
-                count = 3;
-            }
-            else if (event.equals("marriage")) {
-                count = 4;
-            }
-            else if (event.equals("retirement")) {
-                count = 5;
-            }
-            else if (event.equals("death")) {
-                count = 6;
-            }
-            else {
-                count = 7;
-            }
-            eventColorMap.put(event, colorList.get(count));
+//            if (event.equals("birth")) {
+//                count = 0;
+//            }
+           for (int i = 1; i < 8; i++) {
+               if (events[i-1] == null || event.equals(events[i-1])) {
+                   events[i-1] = event;
+                   count = i;
+                   break;
+               }
+           }
+
+           if (count == 0) {
+               count = 8;
+           }
+//        else if (event.equals("second job")) {
+//            count = 2;
+//        }
+//        else if (event.equals("third job")) {
+//            count = 3;
+//        }
+//        else if (event.equals("marriage")) {
+//            count = 4;
+//        }
+//        else if (event.equals("retirement")) {
+//            count = 5;
+//        }
+//        else if (event.equals("death")) {
+//            count = 6;
+//        }
+//        else {
+            eventColorMap.put(event, colorList.get(count - 1));
         }
     }
 
@@ -222,13 +234,26 @@ public class ServerData {
     }
 
     public void setEventList(List<Event> eventList) {
-        this.eventList = eventList;
+        this.eventList = new ArrayList<>();
+
+        this.eventList.addAll(eventList);
         eventMap = new HashMap<>();
         for (Event event: eventList) {
             if (!eventMap.containsKey(event.getEventID())) {
                 eventMap.put(event.getEventID(), event);
             }
         }
+        Event notEvent = new Event();
+        notEvent.setPersonID("zzztest");
+        notEvent.setEventID("zzztest");
+        notEvent.setDescendant(user.getUserName());
+        notEvent.setDescription("third job");
+        notEvent.setLatitude(new Double(0));
+        notEvent.setLongitude(new Double(0));
+        notEvent.setYear(new Integer(999999));
+        notEvent.setCity("zzztest");
+        notEvent.setCountry("zzztest");
+        this.eventList.add(notEvent);
         setEventTypes();
     }
 

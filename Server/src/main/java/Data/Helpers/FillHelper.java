@@ -191,13 +191,8 @@ public class FillHelper {
 		int secondInt = rand.nextInt();
 		makeEvent(person, "first job", firstJob, name);
 		makeEvent(person, "second job", firstJob + 5, name);
-		if (firstInt > secondInt) {
-			makeEvent(person, "third job", firstJob + this.EMPLOYMENT_PERIOD, name);
-			makeEvent(person, "retirement", retired, name);
-		}
-		else {
-			makeEvent(person, "retirement", retired, name);
-		}
+		///makeEvent(person, "third job", firstJob + this.EMPLOYMENT_PERIOD, name);
+		makeEvent(person, "retirement", retired, name);
 	}
 	
 	private void marry(Person father, Person mother, String name)

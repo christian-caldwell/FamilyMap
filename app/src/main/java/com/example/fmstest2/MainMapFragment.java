@@ -135,12 +135,14 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
             LatLng eventLatLng =
                     new LatLng(event.getLatitude(), event.getLongitude());
 
-            curMarker = map.addMarker(new MarkerOptions()
-                    .position(eventLatLng)
-                    .title(person.getFirstName() + " " + person.getLastName())
-                    .icon(BitmapDescriptorFactory.defaultMarker(this.serverData.getEventColorMap().get(event.getDescription()))));
+            if (person != null) {
+                curMarker = map.addMarker(new MarkerOptions()
+                        .position(eventLatLng)
+                        .title(person.getFirstName() + " " + person.getLastName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(this.serverData.getEventColorMap().get(event.getDescription()))));
 
-            eventMarkerMap.put(curMarker, event);
+                eventMarkerMap.put(curMarker, event);
+            }
         }
         currentPersonText.setText("Pick a person to see info");
         map.setOnMarkerClickListener(this);
