@@ -151,6 +151,7 @@ public class SettingsActivity extends AppCompatActivity {
         logoutView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ServerData.getInstance().setLoggedIn(false);
                 Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
@@ -163,9 +164,7 @@ public class SettingsActivity extends AppCompatActivity {
                 PeopleTask peopleTask = new PeopleTask();
                 peopleTask.execute();
                 ServerData.getInstance().setRelog(true);
-                Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
+
         }
         });
 
@@ -238,9 +237,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer id) {
+            Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName() );
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
             Toast.makeText(getApplicationContext(), "Reloaded Data",
                     Toast.LENGTH_LONG).show();
-
         }
     }
 

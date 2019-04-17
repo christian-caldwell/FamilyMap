@@ -19,7 +19,7 @@ public class SearchRowData {
 
     public SearchRowData(Person person) {
         this.person = person;
-        mainText = person.getDescendant();
+        mainText = person.getFirstName() + " " + person.getLastName();
         secondaryText = "";
         if (person.getGender().equals("m")) {
             type = "male";
