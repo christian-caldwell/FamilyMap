@@ -171,31 +171,29 @@ public class ServerData {
         int count;
         eventColorMap = new HashMap<>();
         for (String event: eventTypes) {
-            switch (event) {
-                case ("birth"):
-                    count = 0;
-                    break;
-                case ("first job"):
-                    count = 1;
-                    break;
-                case ("second job"):
-                    count = 2;
-                    break;
-                case ("third job"):
-                    count = 3;
-                    break;
-                case ("marriage"):
-                    count = 4;
-                    break;
-                case ("retirement"):
-                    count = 5;
-                    break;
-                case ("death"):
-                    count = 6;
-                    break;
-                default:
-                    count = 7;
-                    break;
+            if (event.equals("birth")) {
+                count = 0;
+            }
+            else if (event.equals("first job")) {
+                count = 1;
+            }
+            else if (event.equals("first job")) {
+                count = 2;
+            }
+            else if (event.equals("first job")) {
+                count = 3;
+            }
+            else if (event.equals("marriage")) {
+                count = 4;
+            }
+            else if (event.equals("retirement")) {
+                count = 5;
+            }
+            else if (event.equals("death")) {
+                count = 6;
+            }
+            else {
+                count = 7;
             }
             eventColorMap.put(event, colorList.get(count));
         }
