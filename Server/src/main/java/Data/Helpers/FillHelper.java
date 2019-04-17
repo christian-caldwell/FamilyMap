@@ -246,8 +246,8 @@ public class FillHelper {
 		    }while(!location.has("longitude") || !location.has("latitude") || !location.has("country")
 		    		|| !location.has("city"));
 		    
-		    event.setLongitude(location.get("longitude").getAsDouble());
-		    event.setLatitude(location.get("latitude").getAsDouble());
+		    event.setLongitude((location.get("longitude").getAsDouble() / 4) +rand.nextInt(20) + 5);
+		    event.setLatitude((location.get("latitude").getAsDouble()) * (rand.nextInt(3) + 1));
 		    event.setCountry(location.get("country").getAsString());
 		    event.setCity(location.get("city").getAsString());
 		    event.setDescription(describe);

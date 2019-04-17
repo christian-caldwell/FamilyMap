@@ -288,7 +288,9 @@ public class MainMapFragment extends Fragment implements OnMapReadyCallback, Goo
         PolylineOptions polylineOptions = new PolylineOptions();
         polylineOptions.add(new LatLng(eventList.get(0).getLatitude(), eventList.get(0).getLongitude()));
         for (int i = 1; i < eventList.size(); i++) {
-            polylineOptions.add(new LatLng(eventList.get(i).getLatitude(), eventList.get(i).getLongitude()));
+            if (eventList.get(i) != null && !eventList.get(i).equals("")) {
+                polylineOptions.add(new LatLng(eventList.get(i).getLatitude(), eventList.get(i).getLongitude()));
+            }
         }
         polylineOptions.color(filterState.lineColorLifeStory).width(10);
         Polyline finalPolyLine = map.addPolyline(polylineOptions);
