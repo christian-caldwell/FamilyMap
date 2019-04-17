@@ -51,8 +51,8 @@ public class DBAccessEvents
 	{
 		PreparedStatement statement = null;
 		String sql = "insert into events (eventid, descendant, " +
-				"personid, longitude, latitude,  year, description," +
-				" country, city) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				"personid, longitude, latitude,  year, city," +
+				" country, description) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try
 		{
